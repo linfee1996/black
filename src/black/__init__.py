@@ -2311,6 +2311,9 @@ def whitespace(leaf: Leaf, *, complex_subscript: bool) -> str:  # noqa: C901
 
     elif p.type == syms.sliceop:
         return NO
+    
+    if p == ":":
+        return NO
 
     return SPACE
 
