@@ -6626,7 +6626,12 @@ def is_docstring(leaf: Leaf) -> bool:
         # `syms.parameters` is only used in funcdefs and async_funcdefs in the Python
         # grammar. We're safe to return True without further checks.
         return True
-
+    
+    if "'''" in leaf.value:
+        return True
+    if '"""' in leaf.value:
+        return True
+    
     return False
 
 
