@@ -6627,11 +6627,6 @@ def is_docstring(leaf: Leaf) -> bool:
         # grammar. We're safe to return True without further checks.
         return True
     
-    if "'''" in leaf.value:
-        return True
-    if '"""' in leaf.value:
-        return True
-    
     return False
 
 
