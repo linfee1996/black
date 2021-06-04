@@ -808,6 +808,8 @@ def format_file_in_place(
     then = datetime.utcfromtimestamp(src.stat().st_mtime)
     with open(src, "rb") as buf:
         src_contents, encoding, newline = decode_bytes(buf.read())
+        if src_contents.count("\n") > 5000 or src_contents.count("\r\n") > 5000:
+            return False
     try:
         dst_contents = format_file_contents(src_contents, fast=fast, mode=mode)
     except NothingChanged:
@@ -894,6 +896,8 @@ def format_stdin_to_stdout(
     """
     then = datetime.utcnow()
     src, encoding, newline = decode_bytes(sys.stdin.buffer.read())
+    if src.count("\n") > 5000 or src.count("\r\n") > 5000:
+        return False
     dst = src
     try:
         dst = format_file_contents(src, fast=fast, mode=mode)
